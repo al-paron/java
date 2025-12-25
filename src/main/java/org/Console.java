@@ -1,7 +1,7 @@
 package org;
 
 import org.model.*;
-import org.rep.inmemory.*;
+import org.rep.RepositoryFactory;
 import org.service.inmemory.*;
 
 import java.sql.Timestamp;
@@ -23,25 +23,17 @@ public class Console {
     private boolean isSeller = false;
 
     public Console() {
-        UserRepo userRepo = new UserRepo();
-        RoleRepo roleRepo = new RoleRepo();
-        SellerRepo sellerRepo = new SellerRepo();
-        CategoryRepo categoryRepo = new CategoryRepo();
-        ProductRepo productRepo = new ProductRepo();
-        OrderRepo orderRepo = new OrderRepo();
-        OrderItemRepo orderItemRepo = new OrderItemRepo();
-        ReviewRepo reviewRepo = new ReviewRepo();
 
-        this.userService = new UserService(userRepo);
-        this.roleService = new RoleService(roleRepo);
-        this.sellerService = new SellerService(sellerRepo);
-        this.categoryService = new CategoryService(categoryRepo);
-        this.productService = new ProductService(productRepo);
-        this.orderService = new OrderService(orderRepo);
-        this.orderItemService = new OrderItemService(orderItemRepo);
-        this.reviewService = new ReviewService(reviewRepo);
+        this.userService = new UserService(RepositoryFactory.createUserRep());
+        this.roleService = new RoleService(RepositoryFactory.createRoleRep());
+        this.sellerService = new SellerService(RepositoryFactory.createSellerRep());
+        this.categoryService = new CategoryService(RepositoryFactory.createCategoryRep());
+        this.productService = new ProductService(RepositoryFactory.createProductRep());
+        this.orderService = new OrderService(RepositoryFactory.createOrderRep());
+        this.orderItemService = new OrderItemService(RepositoryFactory.createOrderItemRep());
+        this.reviewService = new ReviewService(RepositoryFactory.createReviewRep());
 
-        initializeData();
+        org.rep.jdbc.DatabaseConfig.testConnection();
     }
 
     private void initializeData() {
