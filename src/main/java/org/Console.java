@@ -2,6 +2,7 @@ package org;
 
 import org.model.*;
 import org.rep.RepositoryFactory;
+import org.rep.jdbc.DatabaseConfig;
 import org.service.inmemory.*;
 
 import java.sql.Timestamp;
@@ -32,7 +33,7 @@ public class Console {
         this.orderItemService = new OrderItemService(RepositoryFactory.createOrderItemRep());
         this.reviewService = new ReviewService(RepositoryFactory.createReviewRep());
 
-        org.rep.jdbc.DatabaseConfig.testConnection();
+        DatabaseConfig.testConnection();
     }
     private void initializeData() {
         User admin = new User(1, "admin@market.ru", "+79991112233", "admin_hash");
