@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.Seller;
-import org.rep.inmemory.SellerRepo;
+import org.rep.SellerRep;
 import org.service.SellerInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class SellerService implements SellerInterface {
-    private final SellerRepo sellerRepo;
+    private final SellerRep sellerRepo;
 
-    public SellerService(SellerRepo sellerRepo) {
+    public SellerService(SellerRep sellerRepo) {
         this.sellerRepo = sellerRepo;
     }
 

@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.Review;
-import org.rep.inmemory.ReviewRepo;
+import org.rep.ReviewRep;
 import org.service.ReviewInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ReviewService implements ReviewInterface {
-    private final ReviewRepo reviewRepo;
+    private final ReviewRep reviewRepo;
 
-    public ReviewService(ReviewRepo reviewRepo) {
+    public ReviewService(ReviewRep reviewRepo) {
         this.reviewRepo = reviewRepo;
     }
 

@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.User;
-import org.rep.inmemory.UserRepo;
+import org.rep.UserRep;
 import org.service.UserInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class UserService implements UserInterface {
-    private final UserRepo userRepo;
+    private final UserRep userRepo;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRep userRepo) {
         this.userRepo = userRepo;
     }
 

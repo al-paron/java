@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.Order;
-import org.rep.inmemory.OrderRepo;
+import org.rep.OrderRep;
 import org.service.OrderInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class OrderService implements OrderInterface {
-    private final OrderRepo orderRepo;
+    private final OrderRep orderRepo;
 
-    public OrderService(OrderRepo orderRepo) {
+    public OrderService(OrderRep orderRepo) {
         this.orderRepo = orderRepo;
     }
 

@@ -74,7 +74,7 @@ public class JdbcRoleRep extends JdbcBaseRep<Role> implements RoleRep {
     @Override
     public boolean isUserSeller(Integer userId) {
         String sql = "SELECT COUNT(*) as count FROM roles WHERE user_id = ? AND role = 'SELLER' AND is_deleted = false";
-        List<Integer> counts = executeQuery(sql, rs -> rs.getInt("count"), userId);
+        List<Integer> counts = executeScalarQuery(sql, rs -> rs.getInt("count"), userId);
         return !counts.isEmpty() && counts.get(0) > 0;
     }
 }

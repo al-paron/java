@@ -23,7 +23,6 @@ public class Console {
     private boolean isSeller = false;
 
     public Console() {
-
         this.userService = new UserService(RepositoryFactory.createUserRep());
         this.roleService = new RoleService(RepositoryFactory.createRoleRep());
         this.sellerService = new SellerService(RepositoryFactory.createSellerRep());
@@ -35,7 +34,6 @@ public class Console {
 
         org.rep.jdbc.DatabaseConfig.testConnection();
     }
-
     private void initializeData() {
         User admin = new User(1, "admin@market.ru", "+79991112233", "admin_hash");
         userService.save(admin);
@@ -77,7 +75,7 @@ public class Console {
         System.out.print("Выберите действие: ");
 
         int choice = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         switch (choice) {
             case 1 -> registerUser(scanner);

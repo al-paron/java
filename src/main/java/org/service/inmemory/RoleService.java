@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.Role;
-import org.rep.inmemory.RoleRepo;
+import org.rep.RoleRep;
 import org.service.RoleInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class RoleService implements RoleInterface {
-    private final RoleRepo roleRepo;
+    private final RoleRep roleRepo;
 
-    public RoleService(RoleRepo roleRepo) {
+    public RoleService(RoleRep roleRepo) {
         this.roleRepo = roleRepo;
     }
 

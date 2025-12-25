@@ -79,7 +79,7 @@ public class JdbcUserRep extends JdbcBaseRep<User> implements UserRep {
     @Override
     public boolean emailExists(String email) {
         String sql = "SELECT COUNT(*) as count FROM users WHERE email = ? AND is_deleted = false";
-        List<Integer> counts = executeQuery(sql, rs -> rs.getInt("count"), email);
+        List<Integer> counts = executeScalarQuery(sql, rs -> rs.getInt("count"), email);
         return !counts.isEmpty() && counts.get(0) > 0;
     }
 }

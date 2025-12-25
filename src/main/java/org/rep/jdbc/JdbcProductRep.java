@@ -55,37 +55,31 @@ public class JdbcProductRep extends JdbcBaseRep<Product> implements ProductRep {
                     product.getLastUpdated(),
                     product.getProductionDate()
             );
-            product.setProductId(generatedId);
+            if (generatedId != null) {
+                product.setProductId(generatedId);
+            }
         } else {
             String sql = "UPDATE products SET seller_id = ?, category_id = ?, name = ?, description = ?, price_per_unit = ?, unit = ?, quantity = ?, last_updated = ?, production_date = ?, is_deleted = ? WHERE product_id = ?";
-            try {
-                executeUpdate(sql,
-                        product.getSellerId(),
-                        product.getCategoryId(),
-                        product.getName(),
-                        product.getDescription(),
-                        product.getPricePerUnit(),
-                        product.getUnit(),
-                        product.getQuantity(),
-                        product.getLastUpdated(),
-                        product.getProductionDate(),
-                        product.isDeleted(),
-                        product.getProductId()
-                );
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            executeUpdate(sql,
+                    product.getSellerId(),
+                    product.getCategoryId(),
+                    product.getName(),
+                    product.getDescription(),
+                    product.getPricePerUnit(),
+                    product.getUnit(),
+                    product.getQuantity(),
+                    product.getLastUpdated(),
+                    product.getProductionDate(),
+                    product.isDeleted(),
+                    product.getProductId()
+            );
         }
     }
 
     @Override
     public void delete(Integer id) {
         String sql = "UPDATE products SET is_deleted = true WHERE product_id = ?";
-        try {
-            executeUpdate(sql, id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        executeUpdate(sql, id);
     }
 
     @Override

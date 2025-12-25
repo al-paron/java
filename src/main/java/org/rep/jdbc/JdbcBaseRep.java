@@ -113,12 +113,42 @@ public abstract class JdbcBaseRep<T> {
         }
     }
 
-    protected T executeQuerySingle(String sql, ResultSetMapper<T> mapper, Object... params) {
-        List<T> results = executeQuery(sql, mapper, params);
-        return results.isEmpty() ? null : results.get(0);
+    protected <R> List<R> executeScalarQuery(String sql, ScalarMapper<R> mapper, Object... params) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<R> result = new ArrayList<>();
+
+        try {
+            conn = getConnection();
+            if (conn == null) return result;
+
+            stmt = conn.prepareStatement(sql);
+
+            for (int i = 0; i < params.length; i++) {
+                stmt.setObject(i + 1, params[i]);
+            }
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                result.add(mapper.map(rs));
+            }
+
+            return result;
+        } catch (SQLException e) {
+            System.err.println("Error executing scalar query: " + e.getMessage());
+            return result;
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
     }
 
     protected interface ResultSetMapper<T> {
         T map(ResultSet rs) throws SQLException;
+    }
+
+    protected interface ScalarMapper<R> {
+        R map(ResultSet rs) throws SQLException;
     }
 }

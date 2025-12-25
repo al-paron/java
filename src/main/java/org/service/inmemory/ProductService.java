@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.Product;
-import org.rep.inmemory.ProductRepo;
+import org.rep.ProductRep;
 import org.service.ProductInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class ProductService implements ProductInterface {
-    private final ProductRepo productRepo;
+    private final ProductRep productRepo;
 
-    public ProductService(ProductRepo productRepo) {
+    public ProductService(ProductRep productRepo) {
         this.productRepo = productRepo;
     }
 

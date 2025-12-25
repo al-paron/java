@@ -1,16 +1,16 @@
 package org.service.inmemory;
 
 import org.model.Category;
-import org.rep.inmemory.CategoryRepo;
+import org.rep.CategoryRep;
 import org.service.CategoryInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 public class CategoryService implements CategoryInterface {
-    private final CategoryRepo categoryRepo;
+    private final CategoryRep categoryRepo;
 
-    public CategoryService(CategoryRepo categoryRepo) {
+    public CategoryService(CategoryRep categoryRepo) {
         this.categoryRepo = categoryRepo;
     }
 
