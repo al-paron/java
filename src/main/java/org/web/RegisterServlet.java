@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Optional;
 
 @WebServlet("/register")
 public class RegisterServlet extends BaseServlet {
