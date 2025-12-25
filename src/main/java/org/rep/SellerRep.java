@@ -2,5 +2,8 @@ package org.rep;
 
 import org.model.Seller;
 
-public interface SellerRep extends BaseRep<Seller, Integer>{
+import java.util.Optional;
+
+public interface SellerRep extends BaseRep<Seller, Integer> {
+    Optional<Seller> findByUserId(Integer userId);
 }
