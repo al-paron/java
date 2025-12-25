@@ -1,3 +1,12 @@
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS sellers CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -9,7 +18,7 @@ CREATE TABLE users (
 
 CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(user_id),
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     role VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_deleted BOOLEAN DEFAULT FALSE
@@ -17,7 +26,7 @@ CREATE TABLE roles (
 
 CREATE TABLE sellers (
     seller_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL UNIQUE REFERENCES users(user_id),
+    user_id INTEGER NOT NULL UNIQUE REFERENCES users(user_id) ON DELETE CASCADE,
     farm_name VARCHAR(255) NOT NULL,
     description TEXT,
     rating INTEGER DEFAULT 0,
@@ -33,7 +42,7 @@ CREATE TABLE categories (
 
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
-    seller_id INTEGER NOT NULL REFERENCES sellers(seller_id),
+    seller_id INTEGER NOT NULL REFERENCES sellers(seller_id) ON DELETE CASCADE,
     category_id INTEGER NOT NULL REFERENCES categories(category_id),
     name VARCHAR(255) NOT NULL,
     description TEXT,
@@ -47,7 +56,7 @@ CREATE TABLE products (
 
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(user_id),
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
     address_line TEXT NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'NEW',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -56,7 +65,7 @@ CREATE TABLE orders (
 
 CREATE TABLE order_items (
     order_item_id SERIAL PRIMARY KEY,
-    order_id INTEGER NOT NULL REFERENCES orders(order_id),
+    order_id INTEGER NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
     product_id INTEGER NOT NULL REFERENCES products(product_id),
     quantity DECIMAL(10, 2) NOT NULL,
     price_at_time DECIMAL(10, 2) NOT NULL,
@@ -65,8 +74,8 @@ CREATE TABLE order_items (
 
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(user_id),
-    product_id INTEGER NOT NULL REFERENCES products(product_id),
+    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    product_id INTEGER NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
     rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -93,3 +102,5 @@ INSERT INTO users (email, phone, password_hash) VALUES
 
 INSERT INTO roles (user_id, role) VALUES
     (1, 'ADMIN');
+
+SELECT 'Database schema created successfully!' as message;
