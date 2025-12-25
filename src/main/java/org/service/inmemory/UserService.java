@@ -33,4 +33,9 @@ public class UserService implements UserInterface {
     public void delete(Integer id) {
         userRepo.delete(id);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
 }

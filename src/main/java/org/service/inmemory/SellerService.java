@@ -34,7 +34,7 @@ public class SellerService implements SellerInterface {
         sellerRepo.delete(id);
     }
 
-    // Дополнительный метод для поиска продавца по пользователю
+    @Override
     public Optional<Seller> findByUserId(Integer userId) {
         return sellerRepo.findByUserId(userId);
     }

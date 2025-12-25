@@ -37,7 +37,6 @@ public class SellerRepo implements SellerRep {
         }
     }
 
-    // метод для поиска продавца по пользователю
     public Optional<Seller> findByUserId(Integer userId) {
         return data.values().stream()
                 .filter(seller -> !seller.isDeleted()

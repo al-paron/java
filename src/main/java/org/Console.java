@@ -1,8 +1,8 @@
 package org;
 
 import org.model.*;
-import org.rep.RepositoryFactory;
-import org.rep.jdbc.DatabaseConfig;
+import org.rep.*;
+import org.rep.inmemory.*;
 import org.service.inmemory.*;
 
 import java.sql.Timestamp;
@@ -24,17 +24,25 @@ public class Console {
     private boolean isSeller = false;
 
     public Console() {
-        this.userService = new UserService(RepositoryFactory.createUserRep());
-        this.roleService = new RoleService(RepositoryFactory.createRoleRep());
-        this.sellerService = new SellerService(RepositoryFactory.createSellerRep());
-        this.categoryService = new CategoryService(RepositoryFactory.createCategoryRep());
-        this.productService = new ProductService(RepositoryFactory.createProductRep());
-        this.orderService = new OrderService(RepositoryFactory.createOrderRep());
-        this.orderItemService = new OrderItemService(RepositoryFactory.createOrderItemRep());
-        this.reviewService = new ReviewService(RepositoryFactory.createReviewRep());
+        UserRep userRepo = new UserRepo();
+        RoleRep roleRepo = new RoleRepo();
+        SellerRep sellerRepo = new SellerRepo();
+        CategoryRep categoryRepo = new CategoryRepo();
+        ProductRep productRepo = new ProductRepo();
+        OrderRep orderRepo = new OrderRepo();
+        OrderItemRep orderItemRepo = new OrderItemRepo();
+        ReviewRep reviewRepo = new ReviewRepo();
 
-        DatabaseConfig.testConnection();
+        this.userService = new UserService(userRepo);
+        this.roleService = new RoleService(roleRepo);
+        this.sellerService = new SellerService(sellerRepo);
+        this.categoryService = new CategoryService(categoryRepo);
+        this.productService = new ProductService(productRepo);
+        this.orderService = new OrderService(orderRepo);
+        this.orderItemService = new OrderItemService(orderItemRepo);
+        this.reviewService = new ReviewService(reviewRepo);
     }
+
     private void initializeData() {
         User admin = new User(1, "admin@market.ru", "+79991112233", "admin_hash");
         userService.save(admin);

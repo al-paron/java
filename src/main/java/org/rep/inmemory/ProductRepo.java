@@ -37,7 +37,6 @@ public class ProductRepo implements ProductRep {
         }
     }
 
-    // метод для поиска товаров по продавцу
     public List<Product> findBySellerId(Integer sellerId) {
         return data.values().stream()
                 .filter(product -> !product.isDeleted()
@@ -45,7 +44,6 @@ public class ProductRepo implements ProductRep {
                 .toList();
     }
 
-    // метод для поиска товаров по категории
     public List<Product> findByCategoryId(Integer categoryId) {
         return data.values().stream()
                 .filter(product -> !product.isDeleted()

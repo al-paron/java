@@ -34,11 +34,12 @@ public class RoleService implements RoleInterface {
         roleRepo.delete(id);
     }
 
-    // Дополнительные методы
+    @Override
     public List<Role> findByUserId(Integer userId) {
         return roleRepo.findByUserId(userId);
     }
 
+    @Override
     public boolean isUserSeller(Integer userId) {
         return roleRepo.isUserSeller(userId);
     }

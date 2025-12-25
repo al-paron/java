@@ -37,7 +37,6 @@ public class RoleRepo implements RoleRep {
         }
     }
 
-    // метод для поиска ролей по пользователю
     public List<Role> findByUserId(Integer userId) {
         return data.values().stream()
                 .filter(role -> !role.isDeleted()
@@ -45,7 +44,6 @@ public class RoleRepo implements RoleRep {
                 .toList();
     }
 
-    // метод для проверки, является ли пользователь продавцом
     public boolean isUserSeller(Integer userId) {
         return data.values().stream()
                 .anyMatch(role -> !role.isDeleted()
