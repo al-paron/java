@@ -6,16 +6,14 @@ import java.util.Objects;
 
 public class User {
     private Integer userId;
-    private String role;
     private String email;
     private String phone;
     private String passwordHash;
     private Timestamp createdAt;
     private boolean isDeleted = false;
 
-    public User(Integer userId, String role, String email, String phone, String passwordHash) {
+    public User(Integer userId, String email, String phone, String passwordHash) {
         this.userId = userId;
-        this.role = role;
         this.email = email;
         this.phone = phone;
         this.passwordHash = passwordHash;
@@ -36,14 +34,6 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getEmail() {
@@ -82,19 +72,18 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return isDeleted == user.isDeleted && Objects.equals(userId, user.userId) && Objects.equals(role, user.role) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(passwordHash, user.passwordHash) && Objects.equals(createdAt, user.createdAt);
+        return isDeleted == user.isDeleted && Objects.equals(userId, user.userId) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(passwordHash, user.passwordHash) && Objects.equals(createdAt, user.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, role, email, phone, passwordHash, createdAt, isDeleted);
+        return Objects.hash(userId, email, phone, passwordHash, createdAt, isDeleted);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +

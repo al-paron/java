@@ -6,31 +6,21 @@ import java.util.Objects;
 
 public class Review {
     private Integer reviewId;
-    private Integer customerId;
+    private Integer userId;
     private Integer productId;
-    private Integer sellerId;
     private Integer rating;
     private String comment;
     private Timestamp createdAt;
     private boolean isDeleted = false;
 
-    public Review(Integer reviewId, Integer customerId, Integer sellerId, Integer rating, String comment) {
+    public Review(Integer reviewId, Integer userId, Integer productId, Integer rating, String comment) {
         this.reviewId = reviewId;
-        this.customerId = customerId;
-        this.sellerId = sellerId;
+        this.userId = userId;
+        this.productId = productId;
         this.rating = rating;
         this.comment = comment;
         this.createdAt = Timestamp.from(Instant.now());
     }
-
-//    public Review(Integer reviewId, Integer customerId, Integer productId, Integer rating, String comment) {
-//        this.reviewId = reviewId;
-//        this.customerId = customerId;
-//        this.productId = productId;
-//        this.rating = rating;
-//        this.comment = comment;
-//        this.createdAt = Timestamp.from(Instant.now());
-//    }
 
 
     public boolean isDeleted() {
@@ -49,12 +39,12 @@ public class Review {
         this.reviewId = reviewId;
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getProductId() {
@@ -63,14 +53,6 @@ public class Review {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
-    }
-
-    public Integer getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Integer sellerId) {
-        this.sellerId = sellerId;
     }
 
     public Integer getRating() {
@@ -101,21 +83,20 @@ public class Review {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return isDeleted == review.isDeleted && Objects.equals(reviewId, review.reviewId) && Objects.equals(customerId, review.customerId) && Objects.equals(productId, review.productId) && Objects.equals(sellerId, review.sellerId) && Objects.equals(rating, review.rating) && Objects.equals(comment, review.comment) && Objects.equals(createdAt, review.createdAt);
+        return isDeleted == review.isDeleted && Objects.equals(reviewId, review.reviewId) && Objects.equals(userId, review.userId) && Objects.equals(productId, review.productId) && Objects.equals(rating, review.rating) && Objects.equals(comment, review.comment) && Objects.equals(createdAt, review.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reviewId, customerId, productId, sellerId, rating, comment, createdAt, isDeleted);
+        return Objects.hash(reviewId, userId, productId, rating, comment, createdAt, isDeleted);
     }
 
     @Override
     public String toString() {
         return "Review{" +
                 "reviewId=" + reviewId +
-                ", customerId=" + customerId +
-                ", productId=" + productId +
-                ", sellerId=" + sellerId +
+                ", customerId=" + userId +
+                ", sellerId=" + productId +
                 ", rating=" + rating +
                 ", comment='" + comment + '\'' +
                 ", createdAt=" + createdAt +

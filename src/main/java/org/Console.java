@@ -45,7 +45,7 @@ public class Console {
     }
 
     private void initializeData() {
-        User admin = new User(1, "ADMIN", "admin@market.ru", "+79991112233", "admin_hash");
+        User admin = new User(1, "admin@market.ru", "+79991112233", "admin_hash");
         userService.save(admin);
 
         Role adminRole = new Role(1, 1, "ADMIN", false);
@@ -115,15 +115,15 @@ public class Console {
 
         int newUserId = userService.findAll().size() + 1;
 
-        User newUser = new User(newUserId, "CUSTOMER", email, phone, passwordHash);
+        User newUser = new User(newUserId, email, phone, passwordHash);
         userService.save(newUser);
 
         System.out.println("Регистрация успешна! Ваш ID: " + newUserId);
 
-        System.out.print("Хотите зарегистрироваться как продавец? (да/нет): ");
+        System.out.print("Хотите зарегистрироваться как продавец? (Y/N): ");
         String response = scanner.nextLine();
 
-        if (response.equalsIgnoreCase("да")) {
+        if (response.equalsIgnoreCase("Y")) {
             registerAsSeller(scanner, newUserId);
         }
     }

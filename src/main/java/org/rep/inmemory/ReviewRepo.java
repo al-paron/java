@@ -49,15 +49,15 @@ public class ReviewRepo implements ReviewRep {
     public List<Review> findBySellerId(Integer sellerId) {
         return data.values().stream()
                 .filter(review -> !review.isDeleted()
-                        && review.getSellerId() != null
-                        && review.getSellerId().equals(sellerId))
+                        && review.getProductId() != null
+                        && review.getProductId().equals(sellerId))
                 .toList();
     }
 
     public List<Review> findByCustomerId(Integer customerId) {
         return data.values().stream()
                 .filter(review -> !review.isDeleted()
-                        && review.getCustomerId().equals(customerId))
+                        && review.getUserId().equals(customerId))
                 .toList();
     }
 }
