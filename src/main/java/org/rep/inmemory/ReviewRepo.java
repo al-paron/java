@@ -37,7 +37,6 @@ public class ReviewRepo implements ReviewRep {
         }
     }
 
-    // Дополнительные методы для бизнес-логики
     public List<Review> findByProductId(Integer productId) {
         return data.values().stream()
                 .filter(review -> !review.isDeleted()
@@ -46,18 +45,10 @@ public class ReviewRepo implements ReviewRep {
                 .toList();
     }
 
-    public List<Review> findBySellerId(Integer sellerId) {
+    public List<Review> findByUserId(Integer userId) {
         return data.values().stream()
                 .filter(review -> !review.isDeleted()
-                        && review.getProductId() != null
-                        && review.getProductId().equals(sellerId))
-                .toList();
-    }
-
-    public List<Review> findByCustomerId(Integer customerId) {
-        return data.values().stream()
-                .filter(review -> !review.isDeleted()
-                        && review.getUserId().equals(customerId))
+                        && review.getUserId().equals(userId))
                 .toList();
     }
 }

@@ -437,23 +437,25 @@ public class Console {
             return;
         }
 
-        Product product = productOpt.get();
-
         int newReviewId = reviewService.findAll().size() + 1;
-        Review review = new Review(newReviewId, currentUserId, product.getSellerId(), rating, comment);
-        review.setProductId(productId);
+
+        Review review = new Review(newReviewId, currentUserId, productId, rating, comment);
         reviewService.save(review);
 
         System.out.println("Отзыв успешно добавлен!");
 
-        updateSellerRating(product.getSellerId());
+        updateSellerRating(productOpt.get().getSellerId());
     }
 
     private void updateSellerRating(Integer sellerId) {
-        var reviews = reviewService.findBySellerId(sellerId);
+        var sellerProducts = productService.findBySellerId(sellerId);
 
-        if (!reviews.isEmpty()) {
-            double averageRating = reviews.stream()
+        var allReviews = sellerProducts.stream()
+                .flatMap(product -> reviewService.findByProductId(product.getProductId()).stream())
+                .toList();
+
+        if (!allReviews.isEmpty()) {
+            double averageRating = allReviews.stream()
                     .mapToInt(Review::getRating)
                     .average()
                     .orElse(0.0);
@@ -494,12 +496,20 @@ public class Console {
         }
 
         Seller seller = sellerOpt.get();
-        var reviews = reviewService.findBySellerId(seller.getSellerId());
+        var sellerProducts = productService.findBySellerId(seller.getSellerId());
+
+        var reviews = sellerProducts.stream()
+                .flatMap(product -> reviewService.findByProductId(product.getProductId()).stream())
+                .toList();
 
         if (reviews.isEmpty()) {
             System.out.println("Пока нет отзывов");
         } else {
             reviews.forEach(review -> {
+                var productOpt = productService.findSingle(review.getProductId());
+                String productName = productOpt.map(Product::getName).orElse("Неизвестный товар");
+
+                System.out.println("Товар: " + productName);
                 System.out.println("Оценка: " + review.getRating() + "/5");
                 System.out.println("Комментарий: " + review.getComment());
                 System.out.println("Дата: " + review.getCreatedAt());

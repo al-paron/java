@@ -34,16 +34,11 @@ public class ReviewService implements ReviewInterface {
         reviewRepo.delete(id);
     }
 
-    // Дополнительные методы
     public List<Review> findByProductId(Integer productId) {
         return reviewRepo.findByProductId(productId);
     }
 
-    public List<Review> findBySellerId(Integer sellerId) {
-        return reviewRepo.findBySellerId(sellerId);
-    }
-
-    public List<Review> findByCustomerId(Integer customerId) {
-        return reviewRepo.findByCustomerId(customerId);
+    public List<Review> findByUserId(Integer userId) {
+        return reviewRepo.findByUserId(userId);
     }
 }

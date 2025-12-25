@@ -22,7 +22,6 @@ public class Review {
         this.createdAt = Timestamp.from(Instant.now());
     }
 
-
     public boolean isDeleted() {
         return isDeleted;
     }
@@ -83,7 +82,10 @@ public class Review {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return isDeleted == review.isDeleted && Objects.equals(reviewId, review.reviewId) && Objects.equals(userId, review.userId) && Objects.equals(productId, review.productId) && Objects.equals(rating, review.rating) && Objects.equals(comment, review.comment) && Objects.equals(createdAt, review.createdAt);
+        return isDeleted == review.isDeleted && Objects.equals(reviewId, review.reviewId) &&
+                Objects.equals(userId, review.userId) && Objects.equals(productId, review.productId) &&
+                Objects.equals(rating, review.rating) && Objects.equals(comment, review.comment) &&
+                Objects.equals(createdAt, review.createdAt);
     }
 
     @Override
@@ -95,8 +97,8 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "reviewId=" + reviewId +
-                ", customerId=" + userId +
-                ", sellerId=" + productId +
+                ", userId=" + userId +
+                ", productId=" + productId +
                 ", rating=" + rating +
                 ", comment='" + comment + '\'' +
                 ", createdAt=" + createdAt +
