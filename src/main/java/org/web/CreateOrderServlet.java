@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
 
-@WebServlet("/create-order")
+
 public class CreateOrderServlet extends BaseServlet {
 
     @Override

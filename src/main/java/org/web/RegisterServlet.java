@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
 
-@WebServlet("/register")
+
 public class RegisterServlet extends BaseServlet {
 
     @Override

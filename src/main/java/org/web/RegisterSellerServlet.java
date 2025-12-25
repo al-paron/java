@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/register-seller")
+
 public class RegisterSellerServlet extends BaseServlet {
 
     @Override

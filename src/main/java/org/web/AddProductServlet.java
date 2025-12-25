@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
 
-@WebServlet("/seller/add-product")
+
 public class AddProductServlet extends BaseServlet {
 
     @Override
